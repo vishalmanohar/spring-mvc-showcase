@@ -6,7 +6,7 @@ machine:
 
 dependencies:
   override:
-    - mvn package
+    - mvn package -DskipTests=true
     - docker info
     - docker build -t vishalmanohar/spring-mvc-showcase .
 
