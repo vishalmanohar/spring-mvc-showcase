@@ -1,0 +1,24 @@
+machine:
+  java:
+    version:
+      1.7.0_55
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker info
+    - docker build -t vishalmanohar/spring-mvc-showcase .
+
+test:
+  override:
+    - mvn test -Punit-tests
+  post:
+    - mvn verify -Psmoke-tests
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push vishalmanohar/spring-mvc-showcase
