@@ -1,0 +1,9 @@
+sudo: required
+language: java
+services:
+  - docker
+
+script:
+  mvn package -DskipTests=true
+  docker build -t vishalmanohar/spring-mvc-showcase .
+  docker run  vishalmanohar/spring-mvc-showcase java -version
